@@ -3,11 +3,11 @@ import { createRoot } from 'react-dom/client'
 
 export default function App(){
     return(
-        <h1>123</h1>
+        <h1>Привет</h1>
     );
     
 }
 
 if(document.getElementById('root')){
-    createRoot(document.getElementById('root')).render(<App />)
+    createRoot(document.getElementById('root')).render(<App/>)
 }
