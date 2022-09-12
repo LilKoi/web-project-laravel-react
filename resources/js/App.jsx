@@ -1,12 +1,10 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client'
-import Button from "@mui/material/Button"
-
-export default function App(){
-    return(
-        // <h1>Привет</h1>
-        <Button variant="contained">Hello World</Button>
+import Header from "./Components/Header"
+export default function App() {
+    return (
+        <Header />
     );
-    
+
 }
-createRoot(document.getElementById('root')).render(<App/>)
+createRoot(document.getElementById('root')).render(<App />)

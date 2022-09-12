@@ -25,9 +25,10 @@ function vite_assets(): HtmlString
     $manifest = json_decode(file_get_contents(
         public_path('build/manifest.json')
     ), true);
+    // dd($manifest);
     // dd($manifest['resources/js/app.js']);   
     return new HtmlString(<<<HTML
         <script type="module" src="/build/{$manifest['resources/js/app.js']['file']}"></script>
-        <!-- <link rel="stylesheet" href="/build/{$manifest['resources/js/app.js']['src']}"> -->
+        <link rel="stylesheet" href="/build/{$manifest['resources/css/app.css']['file']}">
     HTML);
 }
