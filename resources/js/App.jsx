@@ -25,8 +25,14 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Header toggleDrawer={this.toggleDrawer} />
-                <LeftMenu open={this.state.drawerOpen} toggleDrawer={this.toggleDrawer} />
+                <Header
+                toggleDrawer={this.toggleDrawer}
+                />
+                <LeftMenu
+                setDrawerOpen={this.setDrawerOpen}
+                open={this.state.drawerOpen}
+                toggleDrawer={this.toggleDrawer}
+                />
             </div>
 
         )
