@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client'
 import Header from "./Components/Header"
 import LeftMenu from './Components/LeftMenu'
+import ChatsList from './Components/ChatsList';
 class App extends React.Component {
 
     constructor(props) {
@@ -33,6 +34,7 @@ class App extends React.Component {
                 open={this.state.drawerOpen}
                 toggleDrawer={this.toggleDrawer}
                 />
+                <ChatsList/>
             </div>
 
         )
