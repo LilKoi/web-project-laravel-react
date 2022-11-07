@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import Header from "./Components/Header"
 import LeftMenu from './Components/LeftMenu'
 import ChatsList from './Components/ChatsList';
+import { Routes, Route, BrowserRouter } from "react-router-dom"
 class App extends React.Component {
 
     constructor(props) {
@@ -27,14 +28,18 @@ class App extends React.Component {
         return (
             <div>
                 <Header
-                toggleDrawer={this.toggleDrawer}
+                    toggleDrawer={this.toggleDrawer}
                 />
                 <LeftMenu
-                setDrawerOpen={this.setDrawerOpen}
-                open={this.state.drawerOpen}
-                toggleDrawer={this.toggleDrawer}
+                    setDrawerOpen={this.setDrawerOpen}
+                    open={this.state.drawerOpen}
+                    toggleDrawer={this.toggleDrawer}
                 />
-                <ChatsList/>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<ChatsList />} />
+                    </Routes>
+                </BrowserRouter>
             </div>
 
         )
