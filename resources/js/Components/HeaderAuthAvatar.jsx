@@ -1,5 +1,6 @@
 import React from "react"
 import Avatar from "@mui/material/Avatar"
+import {Link} from "react-router-dom"
 export default class HeaderAuthAvatar extends React.Component {
 
     constructor(props) {
@@ -9,7 +10,11 @@ export default class HeaderAuthAvatar extends React.Component {
 
     render() {
         return (
-            <Avatar>Test</Avatar>
+            <Avatar
+            to="/profile"
+            component={Link}
+            style={{textDecoration: 'none'}}
+            >Test</Avatar>
         )
     }
 }

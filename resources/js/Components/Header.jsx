@@ -30,7 +30,6 @@ export default class Header extends React.Component {
     render() {
         const inAuth = localStorage.getItem("Auth")
         let modal
-        console.log(inAuth)
         if (inAuth) {
             modal = <HeaderAuthAvatar/>
         } else {

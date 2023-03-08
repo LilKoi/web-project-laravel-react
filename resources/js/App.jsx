@@ -4,6 +4,8 @@ import Header from "./Components/Header"
 import LeftMenu from './Components/LeftMenu'
 import ChatsList from './Components/ChatsList';
 import { Routes, Route, BrowserRouter } from "react-router-dom"
+import Profile from './Components/Profile';
+import ChatPage from './Components/ChatPage';
 class App extends React.Component {
 
     constructor(props) {
@@ -26,21 +28,22 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <Header
-                    toggleDrawer={this.toggleDrawer}
-                />
-                <LeftMenu
-                    setDrawerOpen={this.setDrawerOpen}
-                    open={this.state.drawerOpen}
-                    toggleDrawer={this.toggleDrawer}
-                />
-                <BrowserRouter>
+            <BrowserRouter>
+                    <Header
+                        toggleDrawer={this.toggleDrawer}
+                    />
+                    <LeftMenu
+                        setDrawerOpen={this.setDrawerOpen}
+                        open={this.state.drawerOpen}
+                        toggleDrawer={this.toggleDrawer}
+                    />
+
                     <Routes>
                         <Route path="/" element={<ChatsList />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/chat" element={<ChatPage/>}/>
                     </Routes>
-                </BrowserRouter>
-            </div>
+            </BrowserRouter>
 
         )
     }

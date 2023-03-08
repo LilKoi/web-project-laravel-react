@@ -5,7 +5,7 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-
+import {Link} from "react-router-dom"
 export default class ChatCard extends React.Component {
 
     constructor(props) {
@@ -22,7 +22,7 @@ export default class ChatCard extends React.Component {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small">Learn More</Button>
+                        <Button to="/chat" component={Link} size="small">Learn More</Button>
                     </CardActions>
                 </Card>
             </Grid>

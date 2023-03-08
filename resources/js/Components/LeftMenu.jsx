@@ -14,8 +14,9 @@ export default class LeftMenu extends React.Component {
                 open={this.props.open}
                 onClose={() => this.props.setDrawerOpen(false)}
             >
-                    <MenuItem component={Link} onClick={() => this.props.toggleDrawer()}>Лк</MenuItem>
-                    <MenuItem onClick={() => this.props.toggleDrawer()}>Беседы</MenuItem>
+                <MenuItem to="/profile" component={Link} onClick={() => this.props.toggleDrawer()}>Личный кабинет</MenuItem>
+                <MenuItem to="/" component={Link} onClick={() => this.props.toggleDrawer()}>Беседы</MenuItem>
+                <MenuItem to="/" component={Link} onClick={() => this.props.toggleDrawer()}>выход</MenuItem>
             </SwipeableDrawer>
         )
     }

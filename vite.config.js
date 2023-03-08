@@ -9,7 +9,9 @@ export default ({ command }) => ({
         manifest: true,
         outDir: 'public/build',
         rollupOptions: {
-            input: ['resources/js/app.js', "resources/css/app.css"]
+            input: ['resources/js/app.js', "resources/css/app.css"],
+            external: [
+            ]
         },
     },
     plugins: [
