@@ -5,7 +5,9 @@ export default class HeaderAuthAvatar extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            user: JSON.parse(localStorage.getItem("user"))
+        }
     }
 
     render() {
@@ -13,8 +15,8 @@ export default class HeaderAuthAvatar extends React.Component {
             <Avatar
             to="/profile"
             component={Link}
-            style={{textDecoration: 'none'}}
-            >Test</Avatar>
+            style={{textDecoration: 'none',fontSize:10}}
+            >{this.state.user.name}</Avatar>
         )
     }
 }

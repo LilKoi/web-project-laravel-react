@@ -9,7 +9,9 @@ import Typography from "@mui/material/Typography"
 import { Api } from "../api.js"
 import { useState } from "react"
 import { red } from "@mui/material/colors"
-export default class AuthDialog extends React.Component {
+
+
+export default class RegisterDialog extends React.Component {
 
     constructor(props) {
         super(props)
@@ -26,26 +28,30 @@ export default class AuthDialog extends React.Component {
                 padding: 20,
             },
             login: "",
+            name: "",
             password: "",
             error: ""
         }
-        this.handleInputChange = (event) => {
-            this.setState((pstate) => ({ [event.target.name]: event.target.value }));
-        }
-        this.Loging = async () => {
+        this.Register = async () => {
             try {
-                const response = await Api.login(this.state.login, this.state.password)
+                const response = await Api.register(this.state.name ,this.state.login, this.state.password)
                 this.setState((pstate) => ({ error: "" }))
+                this.setState((pstate) => ({ name: "" }))
                 this.setState((pstate) => ({ login: "" }))
                 this.setState((pstate) => ({ password: "" }))
+                // console.log()
                 localStorage.setItem("user", JSON.stringify(response.data.user))
                 localStorage.setItem("jwt", JSON.stringify(response.data.authorisation))
                 this.props.setModal(false)
-                console.log(await response)
             } catch (error) {
+                console.log(error.response)
                 this.setState((pstate) => ({ error: error.response.data.message }))
             }
         }
+        this.handleInputChange = (event) => {
+            this.setState((pstate) => ({ [event.target.name]: event.target.value }));
+        };
+
     }
     render() {
         return (
@@ -61,11 +67,12 @@ export default class AuthDialog extends React.Component {
                     component="h2"
                     align="center"
                 >
-                    Авторизируйтесь
+                    Регистрация
                 </DialogTitle>
                 <Box sx={{ padding: 2 }}>
-                    <TextField name="login" value={this.state.login} onChange={this.handleInputChange} id="standard-basic" label="Login" variant="standard" />
-                    <TextField name="password" value={this.state.password} onChange={this.handleInputChange} type="password" id="standard-basic" label="Password" variant="standard" />
+                <TextField name="name" value={this.state.name} onChange={this.handleInputChange} id="standard-basic" label="Name" variant="standard" />
+                <TextField name="login" value={this.state.login} onChange={this.handleInputChange} id="standard-basic" label="Login" variant="standard" />
+                <TextField name="password" value={this.state.password} onChange={this.handleInputChange} id="standard-basic" label="Password" variant="standard" type="password" />
                 </Box>
                 <Typography
                     variant="h6"
@@ -74,10 +81,9 @@ export default class AuthDialog extends React.Component {
                 >
                     {this.state.error}
                 </Typography>
-
                 <DialogActions>
-                    <Button onClick={() => this.props.setModal(false)}>Cancel</Button>
-                    <Button onClick={() => this.Loging()}>Subscribe</Button>
+                    <Button onClick={() => this.props.setModal(false)}>Закрыть</Button>
+                    <Button onClick={() => this.Register()}>Зарегистрироваться</Button>
                 </DialogActions>
             </Dialog >
         )

@@ -7,7 +7,7 @@ export default class Chat extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            position: props.position,
+            message: props.message,
             avatar: props.avatar ?? "path"
         }
         console.log(this.state.position)
@@ -19,26 +19,26 @@ export default class Chat extends React.Component {
                 item
                 xs={6}
                 sm={6}
-                justifyContent={this.state.position == 'right' ? "flex-end" : ""}
+                justifyContent={this.state.message.user_id == JSON.parse(localStorage.getItem("user"))?.id ? "flex-end" : ""}
                 container
                 alignItems="center"
                 style={{
-                    "align-self": this.state.position == "left" ? "flex-start" : "flex-end"
+                    "align-self": this.state.message.user_id != JSON.parse(localStorage.getItem("user"))?.id ? "flex-start" : "flex-end"
                 }}> {
-                    this.state.avatar !== "" && this.state.position != "right" &&
+                    this.state.avatar !== "" && this.state.message.user_id != JSON.parse(localStorage.getItem("user"))?.id &&
                     <Avatar src={this.state.avatar}></Avatar>
                 }
                 <Typography
                     component="p"
                     sx={{
                         py: 0.5,
-                        px:1,
-                        bgcolor: this.state.position == 'left' ? "#f5f5f5" : 'red'
+                        px: 1,
+                        bgcolor: this.state.message.user_id != JSON.parse(localStorage.getItem("user"))?.id ? "#f5f5f5" : 'red'
                     }}
                     style={{
-                        borderRadius: this.state.position == 'left' ? "5px 5px 5px 0" : "5px 5px 0 5px",
+                        borderRadius: this.state.message.user_id != JSON.parse(localStorage.getItem("user"))?.id ? "5px 5px 5px 0" : "5px 5px 0 5px",
                     }}
-                >123</Typography>
+                >{this.props.message.text}</Typography>
             </Grid>
         )
     }

@@ -8,13 +8,23 @@ export default class LeftMenu extends React.Component {
     }
 
     render() {
-        return (
+        
+        return localStorage.getItem("user") ? (
             <SwipeableDrawer
                 width={200}
                 open={this.props.open}
                 onClose={() => this.props.setDrawerOpen(false)}
             >
                 <MenuItem to="/profile" component={Link} onClick={() => this.props.toggleDrawer()}>Личный кабинет</MenuItem>
+                <MenuItem to="/" component={Link} onClick={() => this.props.toggleDrawer()}>Беседы</MenuItem>
+                <MenuItem to="/" component={Link} onClick={() => this.props.toggleDrawer()}>выход</MenuItem>
+            </SwipeableDrawer>
+        ) : (
+            <SwipeableDrawer
+                width={200}
+                open={this.props.open}
+                onClose={() => this.props.setDrawerOpen(false)}
+            >
                 <MenuItem to="/" component={Link} onClick={() => this.props.toggleDrawer()}>Беседы</MenuItem>
                 <MenuItem to="/" component={Link} onClick={() => this.props.toggleDrawer()}>выход</MenuItem>
             </SwipeableDrawer>

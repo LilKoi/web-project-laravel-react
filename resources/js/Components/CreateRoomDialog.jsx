@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography"
 import { Api } from "../api.js"
 import { useState } from "react"
 import { red } from "@mui/material/colors"
-export default class AuthDialog extends React.Component {
+export default class CreateRoomDialog extends React.Component {
 
     constructor(props) {
         super(props)
@@ -25,23 +25,19 @@ export default class AuthDialog extends React.Component {
                 boxShadow: 24,
                 padding: 20,
             },
-            login: "",
-            password: "",
+            name: "",
             error: ""
         }
         this.handleInputChange = (event) => {
             this.setState((pstate) => ({ [event.target.name]: event.target.value }));
         }
-        this.Loging = async () => {
+        this.CreateRoom = async () => {
             try {
-                const response = await Api.login(this.state.login, this.state.password)
+                const response = await Api.CreateRoom(this.state.name)
                 this.setState((pstate) => ({ error: "" }))
-                this.setState((pstate) => ({ login: "" }))
-                this.setState((pstate) => ({ password: "" }))
-                localStorage.setItem("user", JSON.stringify(response.data.user))
-                localStorage.setItem("jwt", JSON.stringify(response.data.authorisation))
+                this.setState((pstate) => ({ name: "" }))
                 this.props.setModal(false)
-                console.log(await response)
+                this.props.fetchData()
             } catch (error) {
                 this.setState((pstate) => ({ error: error.response.data.message }))
             }
@@ -61,11 +57,10 @@ export default class AuthDialog extends React.Component {
                     component="h2"
                     align="center"
                 >
-                    Авторизируйтесь
+                    Создать комнату
                 </DialogTitle>
                 <Box sx={{ padding: 2 }}>
-                    <TextField name="login" value={this.state.login} onChange={this.handleInputChange} id="standard-basic" label="Login" variant="standard" />
-                    <TextField name="password" value={this.state.password} onChange={this.handleInputChange} type="password" id="standard-basic" label="Password" variant="standard" />
+                    <TextField name="name" value={this.state.name} onChange={this.handleInputChange} id="standard-basic" label="Имя" variant="standard" />
                 </Box>
                 <Typography
                     variant="h6"
@@ -77,7 +72,7 @@ export default class AuthDialog extends React.Component {
 
                 <DialogActions>
                     <Button onClick={() => this.props.setModal(false)}>Cancel</Button>
-                    <Button onClick={() => this.Loging()}>Subscribe</Button>
+                    <Button onClick={() => this.CreateRoom()}>Создать</Button>
                 </DialogActions>
             </Dialog >
         )

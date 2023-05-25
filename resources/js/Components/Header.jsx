@@ -8,33 +8,25 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AuthDialog from './AuthDialog';
 import HeaderAuthAvatar from "./HeaderAuthAvatar"
+import RegisterDialog from "./RegisterDialog"
 export default class Header extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = {
-            openModal: false,
-        }
-        this.toggleModal = () => {
-            this.setState((pstate) => ({ openModal: !pstate.openModal }))
-        }
-        this.setModal = (setModal) => {
-            this.setState({
-                openModal: setModal
-            })
-        }
     }
 
 
 
     render() {
-        const inAuth = localStorage.getItem("Auth")
+        const inAuth = localStorage.getItem("jwt") ?? false
         let modal
         if (inAuth) {
-            modal = <HeaderAuthAvatar/>
+            modal = <HeaderAuthAvatar />
         } else {
-            modal =
-                <Button onClick={() => this.toggleModal()} color="inherit">Login</Button>
+            modal = [
+                <Button onClick={() => this.props.toggleModalLogin()} color="inherit">Login</Button>,
+                <Button onClick={() => this.props.toggleModalRegister()} color="inherit">Register</Button>
+            ]
         }
         return (
             <Box sx={{ flexGrow: 1 }}>
@@ -58,14 +50,19 @@ export default class Header extends React.Component {
                         >
                             Чат
                         </Typography>
-                        {modal}
+                        {Array.isArray(modal) ? modal.map(button => button) : modal}
                     </Toolbar>
                 </AppBar>
                 <AuthDialog
-                        openModal={this.state.openModal}
-                        setModal={this.setModal}
-                        toggleModal={this.toggleModal}
-                    />
+                    openModal={this.props.openModalLogin}
+                    setModal={this.props.setModalLogin}
+                    toggleModal={this.props.toggleModalLogin}
+                />
+                <RegisterDialog
+                    openModal={this.props.openModalRegister}
+                    setModal={this.props.setModalRegister}
+                    toggleModal={this.props.toggleModalRegister}
+                />
             </Box>
         )
     }

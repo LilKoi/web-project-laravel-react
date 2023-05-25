@@ -11,14 +11,31 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            drawerOpen: false
+            drawerOpen: false,
+            openModalLogin: false,
+            openModalRegister: false,
+        }
+        this.toggleModalLogin = () => {
+            this.setState((pstate) => ({ openModalLogin: !pstate.openModal }))
+        }
+        this.setModalLogin = (setModal) => {
+            this.setState({
+                openModalLogin: setModal
+            })
+        }
+        this.toggleModalRegister = () => {
+            this.setState((pstate) => ({ openModalRegister: !pstate.openModal }))
+        }
+        this.setModalRegister = (setModal) => {
+            this.setState({
+                openModalRegister: setModal
+            })
         }
     }
 
     toggleDrawer = () => {
         this.setState((pstate) => ({ drawerOpen: !pstate.drawerOpen }))
     }
-
     setDrawerOpen = (isDrawerOpen) => {
         this.setState({
             drawerOpen: isDrawerOpen
@@ -29,20 +46,28 @@ class App extends React.Component {
     render() {
         return (
             <BrowserRouter>
-                    <Header
-                        toggleDrawer={this.toggleDrawer}
-                    />
-                    <LeftMenu
-                        setDrawerOpen={this.setDrawerOpen}
-                        open={this.state.drawerOpen}
-                        toggleDrawer={this.toggleDrawer}
-                    />
+                <Header
+                    openModalRegister={this.state.openModalRegister}
+                    setModalRegister={this.setModalRegister}
+                    toggleModalRegister={this.toggleModalRegister}
+                    openModalLogin={this.state.openModalLogin}
+                    setModalLogin={this.setModalLogin}
+                    toggleModalLogin={this.toggleModalLogin}
+                    toggleDrawer={this.toggleDrawer}
+                />
+                <LeftMenu
+                    setDrawerOpen={this.setDrawerOpen}
+                    open={this.state.drawerOpen}
+                    toggleDrawer={this.toggleDrawer}
+                />
 
-                    <Routes>
-                        <Route path="/" element={<ChatsList />} />
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/chat" element={<ChatPage/>}/>
-                    </Routes>
+                <Routes>
+                    <Route path="/" element={<ChatsList
+                        toggleModalLogin={this.toggleModalLogin}
+                    />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/chat/:id" element={<ChatPage />} />
+                </Routes>
             </BrowserRouter>
 
         )
