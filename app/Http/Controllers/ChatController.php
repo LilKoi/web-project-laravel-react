@@ -43,7 +43,7 @@ class ChatController extends Controller
     {
         $message = new Message([
             "room_id" => $request->room_id,
-            "user_id" => Auth::user()->id,
+            "user_id" => $request->user_id,
             "text" => $request->text
         ]);
         $message->save();

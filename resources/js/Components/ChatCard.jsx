@@ -25,7 +25,7 @@ export default class ChatCard extends React.Component {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button to={`/chat/${this.state.room.id}`} component={Link} size="small">Присоедениться</Button>
+                        <Button to={`/chat/${this.state.room.id}`} component={Link} size="small">Присоединиться</Button>
                     </CardActions>
                 </Card>
             </Grid>
